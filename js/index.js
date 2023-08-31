@@ -6,13 +6,11 @@ const error404 = document.querySelector('.not-found');
 
 
 search.addEventListener('click', () => {
-    const APIKey = '7c51cbdf4f1305b7502ef9a57b2b26f0';
+    // const APIKey = APIKey;
     const city = document.querySelector('.search-box input').value;
 
     if (city === '')
         return;
-    // https://api.openweathermap.org/data/2.5/weather?q=poltava&appid=${APIKey}
-    // fetch(`http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=${APIKey}`)
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`)
         .then(response => response.json())
         .then(json =>{
@@ -34,7 +32,7 @@ search.addEventListener('click', () => {
             const humidity = document.querySelector('.weather-details .humidity span');
             const wind = document.querySelector('.weather-details .wind span');
             // ?????
-            console.log(json.weather[0].main);
+
             switch (json.weather[0].main){
                 case 'Clear':
                     image.src = 'img/clear.png';
@@ -64,6 +62,7 @@ search.addEventListener('click', () => {
                     image.src = '';
             }
             // ?????
+            
             temperature.innerHTML = Math.round(parseInt(json.main.temp) - 273.15) + "&#8451";
             description.innerHTML = `${json.weather[0].description}`;
             humidity.innerHTML = `${json.main.humidity}%`;
